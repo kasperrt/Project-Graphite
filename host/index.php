@@ -10,7 +10,7 @@
           var socket = io.connect('http://'+window.location.hostname+':3000');
           socket.emit("type", ["host", "123"]);
       </script>
-      <script src="../main.js"></script>
+      <script src="../lib/main.js"></script>
       <script src="host.js"></script>
   </body>
 </html>
