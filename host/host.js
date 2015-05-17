@@ -23,7 +23,8 @@ socket.on('drawing', function(data)
   $("#players").append(template);
   $("#"+name).find("canvas").attr("class", name);
   $("#"+name).find("span").html(name)
-  context = document.getElementsByClassName(name)[0].getContext("2d");
+
+  context = document.getElementsByClassName(name)[0].getContext("2d"); //defines the new context variable to be used by main.redraw();
   $("."+name).attr("height", drawing[3] + "px");
   $("."+name).attr("width", drawing[4] + "px");
   main.redraw(drawing[0], drawing[1], drawing[2], drawing[5]);
