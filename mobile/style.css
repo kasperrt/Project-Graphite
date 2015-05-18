@@ -5,8 +5,9 @@ canvas {
 
 input {
   width:99%;
+  font-size:2em;
 }
 
 button {
-  /*font-size:9em;*/
+  font-size:2em;
 }
