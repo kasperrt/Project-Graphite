@@ -4,7 +4,8 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var crypto = require('crypto');
 
-var port = 3000;
+var socketport = 3000;
+var port = 8080;
 var lists = [];
 
 var static = require('node-static');
@@ -27,10 +28,10 @@ require('http').createServer(function (request, response) {
         else file.serveFile(type+'/index.html', 200, {}, request, response);
 
     }).resume();
-}).listen(8080);
+}).listen(port, function(){console.log('HTTP Server lsitening at port %d', port)});
 
-server.listen(port, function () {
-  console.log('Server listening at port %d', port);
+server.listen(socketport, function () {
+  console.log('Socket.io listening at port %d', port);
 });
 
 
