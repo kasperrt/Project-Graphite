@@ -53,10 +53,41 @@ io.on('connection', function(socket){
         case "client":
           room = type[1];
           console.log('client present');
-          socket.join('client');
-          io.to(room).emit('client-join', guid);
+          socket.join(room + '_client');
+          console.log(socket.id);
+          io.to(room).emit('client-join', socket.id);
           break;
       }
+  });
+
+  socket.on("not_allowed", function(client_id)
+  {
+    io.to(client_id).emit('started');
+    io.to(client_id).emit("leave");
+  });
+
+  socket.on("leave", function()
+  {
+    socket.leave(room+"_client");
+  });
+
+  socket.on("game_start", function(options)
+  {
+    var clients = io.sockets.adapter.rooms[room+"_client"];
+
+    console.log(clients);
+
+    //to get the number of clients
+    var numClients = (typeof clients !== 'undefined') ? Object.keys(clients).length : 0;
+
+    for (var clientId in clients ) {
+
+         //this is the socket of each client in the room.
+         var clientSocket = io.sockets.connected[clientId];
+         //you can do whatever you need with this
+         clientSocket.emit('to_draw', options[0]);
+         options.shift();
+    }
   });
 
   socket.on("draw", function(data)
@@ -67,11 +98,17 @@ io.on('connection', function(socket){
   socket.on("name", function(name)
   {
     n = name.replace(/[^a-zA-Z0-9]/gi,'');;
+    //socket.set('nickname', n);
     socket.broadcast.to(room).emit("player_name", n);
   });
 
   socket.on('disconnect', function()
   {
+    if(type == "host")
+    {
+      io.to(room+"_client").emit('started');
+      io.to(room+"_client").emit('leave');
+    }
     console.log("disconnected");
   });
 });

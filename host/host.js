@@ -11,8 +11,16 @@ var host =
     }
 }
 
-var clients = new Array();;
+var clients = new Array();
+var drawings = new Array();
 var started = false;
+var options = ["dog", "cat", "elephant", "yoda", "poop master"];
+
+document.getElementById("start_game").addEventListener("click", function(){
+  started = true;
+  socket.emit("game_start", options);
+});
+
 //context = document.getElementById('canvas').getContext("2d");
 
 socket.on('drawing', function(data)
@@ -31,12 +39,22 @@ socket.on('drawing', function(data)
     $("."+name).attr("width", drawing[4] + "px");*/
     main.redraw(drawing[0], drawing[1], drawing[2], drawing[5], true);
     clients.push([name, drawing]);
+  }else
+  {
+    drawings.push([data[1], data[0]]);
+    if(drawings.length == clients.length) console.log("drawing over");
   }
 });
 
 socket.on("player_name", function(name)
 {
   console.log("Player " + name + " has joined the game");
+});
+
+socket.on("client-join", function(client_id)
+{
+  if(started)
+    socket.emit("not_allowed", client_id);
 });
 
 socket.on("room_name", function(name)
