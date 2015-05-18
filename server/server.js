@@ -12,7 +12,7 @@ var static = require('node-static');
 var MobileDetect = require('mobile-detect');
 
 //
-// Create a node-static server instance to serve the './public' folder
+// Create a node-static server instance to serve the './' folder
 //
 var file = new static.Server('./');
 
