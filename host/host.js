@@ -12,22 +12,26 @@ var host =
 }
 
 var clients;
+var started = false;
 //context = document.getElementById('canvas').getContext("2d");
 
 socket.on('drawing', function(data)
 {
-  drawing = data[0];
-  name = data[1];
-  name.replace(" ", "%20");
-  template = '<div id="'+name+'" class="player"><canvas class="player_icon" width="490" height="220"></canvas><span class="player_name"></span>';
-  $("#players").append(template);
-  $("#"+name).find("canvas").attr("class", name);
-  $("#"+name).find("span").html(name)
+  if(!started)
+  {
+    drawing = data[0];
+    name = data[1];
+    name.replace(" ", "%20");
+    template = '<div id="'+name+'" class="player"><canvas class="player_icon" width="490" height="220"></canvas><span class="player_name"></span>';
+    $("#players").append(template);
+    $("#"+name).find("canvas").attr("class", name);
+    $("#"+name).find("span").html(name)
 
-  context = document.getElementsByClassName(name)[0].getContext("2d"); //defines the new context variable to be used by main.redraw();
-  $("."+name).attr("height", drawing[3] + "px");
-  $("."+name).attr("width", drawing[4] + "px");
-  main.redraw(drawing[0], drawing[1], drawing[2], drawing[5], true);
+    context = document.getElementsByClassName(name)[0].getContext("2d"); //defines the new context variable to be used by main.redraw();
+    $("."+name).attr("height", drawing[3] + "px");
+    $("."+name).attr("width", drawing[4] + "px");
+    main.redraw(drawing[0], drawing[1], drawing[2], drawing[5], true);
+  }
 });
 
 socket.on("player_name", function(name)
