@@ -28,13 +28,13 @@ $('#canvas').bind("touchstart",function(e){
 
   paint = true;
   addClick(mouseX, mouseY);
-  main.redraw(clickX, clickY, clickDrag, color);
+  main.redraw(clickX, clickY, clickDrag, color, false);
 });
 
 $('#canvas').bind("touchmove", function(e){
   if(paint){
     addClick(e.originalEvent.touches[0].pageX - this.offsetLeft, e.originalEvent.touches[0].pageY - this.offsetTop, true);
-    main.redraw(clickX, clickY, clickDrag, color);
+    main.redraw(clickX, clickY, clickDrag, color, false);
   }
   e.preventDefault();
 });

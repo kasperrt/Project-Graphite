@@ -27,10 +27,15 @@ socket.on('drawing', function(data)
   context = document.getElementsByClassName(name)[0].getContext("2d"); //defines the new context variable to be used by main.redraw();
   $("."+name).attr("height", drawing[3] + "px");
   $("."+name).attr("width", drawing[4] + "px");
-  main.redraw(drawing[0], drawing[1], drawing[2], drawing[5]);
+  main.redraw(drawing[0], drawing[1], drawing[2], drawing[5], true);
 });
 
 socket.on("player_name", function(name)
 {
   console.log("Player " + name + " has joined the game");
+});
+
+socket.on("room_name", function(name)
+{
+  $("#room_name").html(name);
 });

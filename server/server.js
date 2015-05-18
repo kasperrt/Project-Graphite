@@ -43,13 +43,15 @@ io.on('connection', function(socket){
 
   socket.on('type', function(type)
   {
-      room = type[1];
       switch (type[0]){
         case "host":
+          room = guid.toUpperCase().substring(0,4);
           console.log('host present');
           socket.join(room);
+          socket.emit("room_name", room);
           break;
         case "client":
+          room = type[1];
           console.log('client present');
           socket.join('client');
           io.to(room).emit('client-join', guid);
