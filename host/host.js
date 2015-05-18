@@ -24,7 +24,7 @@ socket.on('drawing', function(data)
     template = '<li id="'+name+'" class="player"><span class="player_name"></span><canvas class="player_icon" width="'+drawing[4]+'" height="'+drawing[3]+'"></canvas></li>';
     $("#players").append(template);
     $("#"+name).find("canvas").attr("class", name);
-    $("#"+name).find("span").html("Room code: "+name)
+    $("#"+name).find("span").html(name)
 
     context = document.getElementsByClassName(name)[0].getContext("2d"); //defines the new context variable to be used by main.redraw();
     /*$("."+name).attr("height", drawing[3] + "px");
@@ -41,5 +41,5 @@ socket.on("player_name", function(name)
 
 socket.on("room_name", function(name)
 {
-  $("#room_name").html(name);
+  $("#room_name").html("Room code: "+name);
 });
