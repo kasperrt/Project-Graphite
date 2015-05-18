@@ -11,6 +11,7 @@ var named = false;
 var icon = false;
 var height = $(window).height()-50;
 var width = $(window).width()-20;
+var to_draw;
 
 context = document.getElementById('canvas').getContext("2d");
 
@@ -51,6 +52,7 @@ $('#canvas').mouseleave(function(e){
 
 socket.on("to_draw", function(object)
 {
+  to_draw = object;
   print_message(object);
   hide(false, false, false, true);
 });
@@ -93,7 +95,7 @@ document.getElementById("send_button").addEventListener("click", function(){
   }else
   {
     console.log("drawing");
-    socket.emit("draw", [clickX, clickY, clickDrag, height, width, color]);
+    socket.emit("draw", [clickX, clickY, clickDrag, height, width, color, to_draw]);
     clickX = new Array();
     clickY = new Array();
     clickDrag = new Array();

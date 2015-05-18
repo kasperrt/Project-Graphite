@@ -42,7 +42,7 @@ socket.on('drawing', function(data)
   }else
   {
     drawings.push([data[1], data[0]]);
-    if(drawings.length == clients.length) console.log("drawing over");
+    if(drawings.length == clients.length){console.log("drawing over"); console.log(drawings);}
   }
 });
 
