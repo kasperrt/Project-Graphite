@@ -1,11 +1,12 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
   </head>
   <body>
       <form id="input_form" onsubmit="return false;">
-        <input type="text" name="input" autocomplete="off" maxlength="15">
+        <input type="text" name="input" autocomplete="off" maxlength="15" pattern="[a-zA-Z0-9-]+">
       </form>
       <canvas id="canvas"></canvas>
       <button id="send_button">Send</button>

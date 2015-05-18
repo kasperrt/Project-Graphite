@@ -28,7 +28,7 @@ require('http').createServer(function (request, response) {
         else file.serveFile(type+'/index.html', 200, {}, request, response);
 
     }).resume();
-}).listen(port, function(){console.log('HTTP Server lsitening at port %d', port)});
+}).listen(port, function(){console.log('HTTP Server listening at port %d', port)});
 
 server.listen(socketport, function () {
   console.log('Socket.io listening at port %d', port);
@@ -66,7 +66,7 @@ io.on('connection', function(socket){
 
   socket.on("name", function(name)
   {
-    n = name;
+    n = name.replace(/[^a-zA-Z0-9]/gi,'');;
     socket.broadcast.to(room).emit("player_name", n);
   });
 

@@ -10,13 +10,15 @@ var joined = false;
 var named = false;
 var icon = false;
 var socket;
+var height = $(window).height()-50;
+var width = $(window).width()-20;
 
 context = document.getElementById('canvas').getContext("2d");
 
 
 $(document).ready(function(){
-  $("#canvas").attr("height", $(window).height()-200 + "px");
-  $("#canvas").attr("width", $(window).width()-20 + "px");
+  $("#canvas").attr("height", height + "px");
+  $("#canvas").attr("width", width + "px");
 });
 
 $('#canvas').bind("touchstart",function(e){
@@ -67,7 +69,7 @@ document.getElementById("send_button").addEventListener("click", function(){
   {
     console.log("drawing");
     drawing != drawing;
-    socket.emit("draw", [clickX, clickY, clickDrag, $(window).height()-200, $(window).width()-20, color]);
+    socket.emit("draw", [clickX, clickY, clickDrag, height, width, color]);
     clickX = new Array();
     clickY = new Array();
     clickDrag = new Array();

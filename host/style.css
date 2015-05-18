@@ -1,4 +1,20 @@
 canvas {
   border:1px solid black;
-  height:95%;
+  width:300px;
+}
+
+.player {
+  display: table-caption;
+  text-align: center;
+}
+
+#players {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.player {
+  display: inline;
+  text-align: center;
 }
