@@ -5,7 +5,7 @@ var io = require('socket.io')(server);
 var crypto = require('crypto');
 
 var socketport = 3000;
-var port = 80;
+var port = 8080;
 var lists = [];
 
 var static = require('node-static');
